@@ -10,10 +10,10 @@ javascript:( function(){
         if (target) {
           Notification.requestPermission().then(function(perm) {
             if (perm === "granted") {
-              var vaxCenterUrl = target && target.getAttribute('href')
+              var vaxCenterUrl = target && target.getAttribute('href');
               if (vaxCenterUrl) {
                 var notif = new Notification("Spot just opened!");
-                notif.onclick = function(){ window.open(target.getAttribute('href'), '_blank')}   
+                notif.onclick = function(){ window.open(target.getAttribute('href'), '_blank') }
               }
             }
           });
