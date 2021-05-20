@@ -6,7 +6,7 @@ javascript:( function(){
         var target = mutation.attributeName === 'class' 
           && mutation.target.classList.contains('changed') 
           ? mutation.target 
-          : null
+          : null;
         if (target) {
           Notification.requestPermission().then(function(perm) {
             if (perm === "granted") {
