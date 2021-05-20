@@ -1,0 +1,27 @@
+javascript:( function(){ 
+  var config = { attributes: true, childList: true, subtree: true };
+  var callback = function(mutationsList, observer) {
+    for (var mutation of mutationsList) {
+      if (mutation.type === 'attributes') {
+        var target = mutation.attributeName === 'class' 
+          && mutation.target.classList.contains('changed') 
+          ? mutation.target 
+          : null
+        if (target) {
+          Notification.requestPermission().then(function(perm) {
+            if (perm === "granted") {
+              var vaxCenterUrl = target && target.getAttribute('href')
+              if (vaxCenterUrl) {
+                var notif = new Notification("Spot just opened!");
+                notif.onclick = function(){ window.open(target.getAttribute('href'), '_blank')}   
+              }
+            }
+          });
+        }
+      }
+    }
+  };
+  console.log('Starting');
+  var observer = new MutationObserver(callback);
+  observer.observe(document.querySelector('.ui.celled.grid'), config);
+})();
